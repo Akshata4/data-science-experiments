@@ -113,7 +113,7 @@ Each project's own README has a full six-screenshot tour, one per CRISP-DM phase
 ## 🚀 Quickstart
 
 ```bash
-git clone https://github.com/<your-username>/data-science-experiments.git
+git clone https://github.com/Akshata4/data-science-experiments.git
 cd data-science-experiments
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
