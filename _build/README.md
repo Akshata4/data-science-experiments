@@ -12,10 +12,14 @@ came from and how it was cleaned.
 | `build_nyc_taxi_dataset.py` | `01_nyc_taxi_trip_duration/data/nyc_taxi_trips.csv` | NYC TLC official Yellow Taxi trip records, Jan 2023 (`d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet`) |
 | `build_retail_datasets.py` | `02_customer_segmentation_clustering/data/retail_rfm.csv`, `03_market_basket_mining/data/basket_transactions.csv` | UCI "Online Retail" dataset (`archive.ics.uci.edu/ml/machine-learning-databases/00352/Online Retail.xlsx`) |
 | `build_fraud_dataset.py` | `04_fraud_anomaly_detection/data/card_transactions.csv` | Kaggle "Credit Card Fraud Detection" (ULB Machine Learning Group) |
+| `fetch_extra_datasets.py` | `05_time_series_forecasting/data/*.csv`, `07_data_science_visual_foundations/data/sms_spam.tsv`, `08_nano_transformer_llm/data/tinyshakespeare.txt` | Classic Box-Jenkins Airline Passengers & Melbourne daily temperatures (Jason Brownlee's public dataset mirror), UCI SMS Spam Collection, Andrej Karpathy's Tiny Shakespeare corpus |
 
 `02_customer_segmentation_clustering/data/Mall_Customers.csv` is used as-is —
 the classic, small (200-row) Kaggle "Mall Customers" demographic dataset,
-no transformation needed.
+no transformation needed. The four files `fetch_extra_datasets.py` downloads
+are likewise used as-is (no cleaning/feature-engineering step) — they're
+copied directly into each project's `data/` folder since they're already
+small, real, and ready to use.
 
 ### Why re-derive instead of shipping raw source files
 
@@ -34,6 +38,7 @@ python build_zone_centroids.py      # writes taxi_zone_centroids.csv here
 python build_nyc_taxi_dataset.py    # needs taxi_zone_centroids.csv above
 python build_retail_datasets.py
 python build_fraud_dataset.py
+python fetch_extra_datasets.py
 ```
 
 Each script downloads its own raw input on first run (see the source URLs

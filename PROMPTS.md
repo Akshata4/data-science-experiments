@@ -124,3 +124,65 @@ and push everything.
 (Video recording itself was explicitly out of scope for this session, per
 the assignment's own note that it's fine to defer — the README link is left
 as a placeholder for the user to fill in after recording.)
+
+---
+
+## 6 — Extending the portfolio: projects 05-08
+
+After the first four projects were published, the follow-up instruction was
+simple:
+
+```text
+please do the same for next 4 projects
+```
+
+Read in context of the whole session, "the same" meant: keep applying the
+established process (pick technique-diverse real projects from the source
+catalog, source genuinely real data for each, build a CRISP-DM Streamlit app
+to the same bar, verify every tab headlessly, document honestly including
+scope trade-offs, then commit and push) without re-litigating the count,
+stack, or repo target already decided in step 2 — so the next four projects
+were chosen and built directly rather than re-asking scope questions already
+settled.
+
+**Technique selection**, aimed at maximum diversity from what the first four
+already covered (regression, clustering, association rules, imbalanced
+classification):
+
+```text
+- 05 Time Series Forecasting: classical statistical forecasting (Holt-
+  Winters, SARIMA) + an ML lag-feature approach, walk-forward backtested —
+  a technique family entirely absent from projects 01-04.
+- 06 AutoML Model Tournament: automated multi-algorithm, multi-hyperparameter
+  search — the source repo's own AutoGluon project, scoped honestly onto
+  plain scikit-learn (see that project's own PROMPTS.md for why).
+- 07 Data Science Visual Foundations: the source repo's own "teach beginner
+  data science students" project (Naive Bayes, model evaluation, gradient
+  descent, chain rule/backprop, quizzes) — the one project in this portfolio
+  that's a teaching tool, not a KPI predictor.
+- 08 Nano Transformer LLM: the source repo's own "nano LLM" project — a
+  real, from-scratch decoder-only Transformer, small enough to train live
+  on a laptop CPU.
+```
+
+**New real datasets sourced** for this batch: the classic Box-Jenkins
+Airline Passengers series and real Melbourne daily temperature readings (for
+05); scikit-learn's own bundled real Breast Cancer / Wine / Diabetes
+datasets, chosen specifically because they need no external download (for
+06); the real UCI SMS Spam Collection (for 07); and Andrej Karpathy's real
+Tiny Shakespeare corpus (for 08). See [`_build/fetch_extra_datasets.py`](./_build/fetch_extra_datasets.py).
+
+**One new dependency, deliberately isolated**: project 08 needed real
+PyTorch autograd for a genuine attention mechanism — the only project in the
+portfolio with a dependency beyond the shared `requirements.txt`, installed
+separately and documented as an explicit opt-in rather than forced on every
+project (see that project's own `PROMPTS.md` for the benchmark that
+justified it).
+
+Every one of the four new apps was driven end-to-end with headless
+Playwright before being considered done, exactly as projects 01-04 were —
+this pass caught and fixed two real issues: a pandas/PyArrow
+duplicate-column-name crash in project 08's vocabulary preview table, and
+confirmed (rather than assumed) that project 05's SARIMA fits and project
+08's live training both complete within a reasonable interactive time budget
+before shipping default hyperparameters.

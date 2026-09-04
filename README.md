@@ -1,10 +1,10 @@
 # 📊 Data Science Experiments — with Claude Code
 
-A hands-on portfolio of **four end-to-end, CRISP-DM-structured data science
-projects**, each a real interactive app (not just a notebook), built almost
-entirely inside **[Claude Code](https://claude.com/claude-code)** as an
-assignment replicating (and improvising on) the workflow demonstrated in
-[dlmastery/data_science_examples](https://github.com/dlmastery/data_science_examples).
+A hands-on portfolio of **eight end-to-end, CRISP-DM-structured data
+science projects**, each a real interactive app (not just a notebook),
+built almost entirely inside **[Claude Code](https://claude.com/claude-code)**
+as an assignment replicating (and improvising on) the workflow demonstrated
+in [dlmastery/data_science_examples](https://github.com/dlmastery/data_science_examples).
 
 **🎥 Video walkthrough:** _[add your YouTube link here before submitting — see "Video walkthrough" below]_
 
@@ -13,14 +13,15 @@ assignment replicating (and improvising on) the workflow demonstrated in
 ## 🧭 What this is
 
 The source repository builds 16 full-stack (FastAPI + React) data science
-products. Rather than rebuild all sixteen shallowly, this repo takes **four**
-of the same core techniques and builds each one **deep**: real public
-datasets (no synthetic stand-ins), multiple competing models per project,
-honest evaluation (the metric that actually matters for each problem, not
-just accuracy), and a genuinely usable live-inference UI — packaged as a
-single-file [Streamlit](https://streamlit.io) app per project instead of a
-separate backend/frontend pair, so anyone can clone this repo and be
-clicking around a running app in under a minute.
+products. Rather than rebuild all sixteen shallowly, this repo takes **eight**
+of the same core techniques — spanning classical ML, forecasting, AutoML,
+teaching tools, and a from-scratch deep learning model — and builds each one
+**deep**: real public datasets (no synthetic stand-ins), multiple competing
+models per project, honest evaluation (the metric that actually matters for
+each problem, not just accuracy), and a genuinely usable live-inference UI —
+packaged as a single-file [Streamlit](https://streamlit.io) app per project
+instead of a separate backend/frontend pair, so anyone can clone this repo
+and be clicking around a running app in under a minute.
 
 | # | Project | Technique | Real dataset | Try it |
 |---|---|---|---|---|
@@ -28,11 +29,16 @@ clicking around a running app in under a minute.
 | 02 | [**Customer Segmentation & Clustering**](./02_customer_segmentation_clustering) | Unsupervised clustering (K-Means / DBSCAN / Agglomerative) | Mall Customers (demographic) **+** UCI Online Retail RFM (behavioral) | `streamlit run 02_customer_segmentation_clustering/app.py` |
 | 03 | [**Market Basket / Associative Pattern Mining**](./03_market_basket_mining) | Association rules (Apriori / FP-Growth) | UCI Online Retail — 4,000 real UK invoices | `streamlit run 03_market_basket_mining/app.py` |
 | 04 | [**Fraud & Anomaly Detection**](./04_fraud_anomaly_detection) | Imbalanced classification / anomaly detection | Kaggle Credit Card Fraud (ULB) — 492 real confirmed frauds | `streamlit run 04_fraud_anomaly_detection/app.py` |
+| 05 | [**Time Series Forecasting**](./05_time_series_forecasting) | Forecasting (Naive / Holt-Winters / SARIMA / ML) | Classic Airline Passengers **+** real Melbourne daily temperatures | `streamlit run 05_time_series_forecasting/app.py` |
+| 06 | [**AutoML Model Tournament**](./06_automl_model_tournament) | Automated multi-model + hyperparameter search | 3 real scikit-learn datasets (Breast Cancer, Wine, Diabetes) | `streamlit run 06_automl_model_tournament/app.py` |
+| 07 | [**Data Science Visual Foundations**](./07_data_science_visual_foundations) | Naive Bayes, model evaluation, gradient descent, backprop | Real SMS Spam Collection **+** real diabetes dataset | `streamlit run 07_data_science_visual_foundations/app.py` |
+| 08 | [**Nano Transformer LLM**](./08_nano_transformer_llm) | From-scratch decoder-only Transformer (PyTorch) | Tiny Shakespeare (real ~1.1MB corpus) | `streamlit run 08_nano_transformer_llm/app.py` |
 
 Every project follows the same **six-phase CRISP-DM** structure as tabs —
 Business Understanding → Data Understanding → Data Preparation → Modeling →
 Evaluation → Deployment — so the methodology is consistent even though the
-techniques are completely different.
+techniques (and, for 07, the entire purpose — a teaching tool, not a KPI
+predictor) are completely different.
 
 ---
 
@@ -71,6 +77,38 @@ Supervised vs. unsupervised fraud scoring with cost-sensitive thresholding.
 
 </td>
 </tr>
+<tr>
+<td width="50%">
+
+**05 · Time Series Forecasting**
+[![Time Series](05_time_series_forecasting/screenshots/ts_03.png)](./05_time_series_forecasting)
+5-model walk-forward forecasting tournament with a live forecast fan.
+
+</td>
+<td width="50%">
+
+**06 · AutoML Model Tournament**
+[![AutoML](06_automl_model_tournament/screenshots/automl_03.png)](./06_automl_model_tournament)
+Automated cross-validated leaderboard across 5-6 algorithms per task.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**07 · Data Science Visual Foundations**
+[![Foundations](07_data_science_visual_foundations/screenshots/viz_03.png)](./07_data_science_visual_foundations)
+Naive Bayes word-by-word, live gradient descent, backprop chain rule, quiz.
+
+</td>
+<td width="50%">
+
+**08 · Nano Transformer LLM**
+[![Nano LLM](08_nano_transformer_llm/screenshots/nano_05_result.png)](./08_nano_transformer_llm)
+A real self-attention Transformer, trained live on Shakespeare, on CPU.
+
+</td>
+</tr>
 </table>
 
 Each project's own README has a full six-screenshot tour, one per CRISP-DM phase.
@@ -81,8 +119,9 @@ Each project's own README has a full six-screenshot tour, one per CRISP-DM phase
 
 * **Real data, always.** Every dataset is sourced from an official or
   well-known public source at build time (NYC TLC's own S3 bucket, UCI's
-  Online Retail archive, the Kaggle/ULB credit-card fraud dataset, the
-  classic Mall Customers panel) — nothing here is fabricated. See
+  Online Retail and SMS Spam archives, the Kaggle/ULB credit-card fraud
+  dataset, classic Box-Jenkins/Karpathy corpora, scikit-learn's bundled
+  real-world datasets) — nothing here is fabricated. See
   [`_build/`](./_build) for the exact scripts and source URLs.
 * **Two datasets, one app** (project 02) — the clustering app isn't limited
   to one classic dataset. A sidebar toggle switches between demographic
@@ -92,17 +131,34 @@ Each project's own README has a full six-screenshot tour, one per CRISP-DM phase
   columns before scaling — standard practice the demographic dataset doesn't
   need).
 * **The metric that matters, not the one that flatters.** The fraud project
-  leads with PR-AUC and a **cost-sensitive threshold slider** (you set the
-  dollar cost of a missed fraud vs. a false alarm, and the app finds the
-  threshold that minimizes expected cost) rather than accuracy, which would
-  be trivially ~96% while catching zero fraud.
+  leads with PR-AUC and a **cost-sensitive threshold slider** rather than
+  accuracy, which would be trivially ~96% while catching zero fraud; the
+  forecasting project evaluates with **walk-forward backtesting**, never a
+  random split, which would leak future values into training.
 * **Genuine model tournaments**, not one model dressed up: taxi duration
   compares 3 regressors, clustering compares 3 algorithms with a live
   elbow/silhouette sweep, market basket compares Apriori vs. FP-Growth
   timing, fraud compares 2 supervised models against an Isolation Forest
-  trained the textbook-correct way (fit only on the non-fraud class).
+  trained the textbook-correct way, forecasting compares 5 approaches across
+  3 rolling backtest folds, and AutoML automatically tunes 5-6 algorithms
+  per task via cross-validated random search.
+* **An honest, stated scope decision** (project 06): rather than install
+  the heavyweight AutoGluon package the source repo used, the AutoML
+  project is a genuine from-scratch `RandomizedSearchCV` tournament on
+  plain scikit-learn — documented as a deliberate trade-off in that
+  project's own README, not hidden.
+* **A real deep learning model, not a mockup** (project 08): a from-scratch
+  PyTorch decoder-only Transformer — real multi-head self-attention, real
+  backpropagation, real sampling — trains live from random initialization
+  on CPU in under a minute, with an attention-weight heatmap for genuine
+  mechanistic interpretability.
+* **A pure teaching tool alongside the business apps** (project 07): Naive
+  Bayes explained word-by-word on a real spam classifier, an interactive
+  gradient-descent loss-surface visualizer, a fully worked backprop
+  chain-rule example, and a 10-question interview-prep quiz — the same
+  CRISP-DM tab shell reinterpreted pedagogically instead of skipped.
 * **One shared design system** ([`common/theme.py`](./common/theme.py))
-  instead of four inconsistent UIs — every app gets the same dark theme,
+  instead of eight inconsistent UIs — every app gets the same dark theme,
   CRISP-DM tab structure, and footer, from one ~80-line module.
 * **Single-file Streamlit apps instead of FastAPI+React pairs** — same
   CRISP-DM rigor and interactivity as the source repo's split-stack apps,
@@ -123,11 +179,18 @@ streamlit run 01_nyc_taxi_trip_duration/app.py
 streamlit run 02_customer_segmentation_clustering/app.py
 streamlit run 03_market_basket_mining/app.py
 streamlit run 04_fraud_anomaly_detection/app.py
+streamlit run 05_time_series_forecasting/app.py
+streamlit run 06_automl_model_tournament/app.py
+streamlit run 07_data_science_visual_foundations/app.py
+
+# project 08 needs one extra, isolated dependency (small CPU-only wheel):
+pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu
+streamlit run 08_nano_transformer_llm/app.py
 ```
 
-Each app opens at `http://localhost:8501` (Streamlit's default — run two at
-once with `--server.port 8502`, etc.). No API keys, no external services, no
-GPU required — every dataset ships pre-built inside the repo.
+Each app opens at `http://localhost:8501` (Streamlit's default — run several
+at once with `--server.port 8502`, etc.). No API keys, no external services,
+no GPU required — every dataset ships pre-built inside the repo.
 
 ---
 
@@ -138,16 +201,17 @@ data-science-experiments/
 ├── README.md                          ← you are here
 ├── PROMPTS.md                         ← prompt log: what was asked, in order
 ├── requirements.txt
-├── common/theme.py                    ← shared dark UI theme for all 4 apps
+├── common/theme.py                    ← shared dark UI theme for all 8 apps
 ├── _build/                            ← scripts that built each dataset from public sources
 ├── 01_nyc_taxi_trip_duration/
-│   ├── app.py  ·  data/  ·  screenshots/  ·  README.md  ·  PROMPTS.md
 ├── 02_customer_segmentation_clustering/
-│   ├── app.py  ·  data/  ·  screenshots/  ·  README.md  ·  PROMPTS.md
 ├── 03_market_basket_mining/
-│   ├── app.py  ·  data/  ·  screenshots/  ·  README.md  ·  PROMPTS.md
-└── 04_fraud_anomaly_detection/
-    ├── app.py  ·  data/  ·  screenshots/  ·  README.md  ·  PROMPTS.md
+├── 04_fraud_anomaly_detection/
+├── 05_time_series_forecasting/
+├── 06_automl_model_tournament/
+├── 07_data_science_visual_foundations/
+└── 08_nano_transformer_llm/
+    └── (each: app.py · data/ · screenshots/ · README.md · PROMPTS.md)
 ```
 
 ---
@@ -178,10 +242,12 @@ asked, and each project's own `PROMPTS.md` for project-specific asks.
 ## 🎥 Video walkthrough
 
 _Add the YouTube link here._ The video should walk through, for each of the
-four projects: the business problem, a tour of the six CRISP-DM tabs, and a
+eight projects: the business problem, a tour of the six CRISP-DM tabs, and a
 live demo of the Deployment tab (estimating a taxi trip, assigning a
-customer segment, getting a market-basket recommendation, and scoring a
-fraud transaction).
+customer segment, getting a market-basket recommendation, scoring a fraud
+transaction, generating a live forecast, scoring an AutoML prediction,
+taking the foundations quiz, and generating Shakespeare-flavored text from
+the nano Transformer).
 
 ## 📄 License & data attribution
 
@@ -189,4 +255,6 @@ Code in this repository is MIT-licensed (see [`LICENSE`](./LICENSE)).
 Datasets are redistributed in cleaned/sampled form under their original
 public terms — see [`_build/README.md`](./_build/README.md) for the exact
 source and license of each one (NYC TLC public data, UCI Machine Learning
-Repository, and the Kaggle/ULB Credit Card Fraud dataset).
+Repository, the Kaggle/ULB Credit Card Fraud dataset, classic Box-Jenkins/
+Karpathy public-domain corpora, and scikit-learn's bundled real-world
+datasets).

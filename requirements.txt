@@ -7,3 +7,7 @@ mlxtend==0.25.0
 scipy==1.17.1
 statsmodels==0.15.0
 pyarrow==25.0.1
+
+# project 08 (nano transformer LLM) only — NOT installed by this file.
+# Install separately from the small CPU-only wheel index:
+#   pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu
