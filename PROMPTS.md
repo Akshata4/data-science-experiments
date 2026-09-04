@@ -186,3 +186,69 @@ duplicate-column-name crash in project 08's vocabulary preview table, and
 confirmed (rather than assumed) that project 05's SARIMA fits and project
 08's live training both complete within a reasonable interactive time budget
 before shipping default hyperparameters.
+
+---
+
+## 7 — Closing the portfolio: projects 09-11
+
+After a status check-in on how many of the source repo's projects remained
+unbuilt, the follow-up instruction was:
+
+```text
+lets work on the new concept ones. keep it simple as we did in earlier
+projects
+```
+
+"The new concept ones" referred to three source-repo projects flagged in
+that status check as genuinely new territory (as opposed to three others
+that were near-duplicates of work already done — see that check-in's own
+breakdown): a wide skills catalog, a full guided CRISP-DM curriculum, and a
+portfolio-wide governance auditor. "Keep it simple" was read as a direct
+instruction to prefer reusing existing datasets and existing patterns over
+introducing new complexity — followed through concretely as **zero new
+external downloads** across all three projects:
+
+```text
+- 09 Data Science Skills Lab: reuse the Mall Customers, Online Retail RFM,
+  and Online Retail invoice data already built for projects 02 and 03 — a
+  10-skill catalog (statistical testing, outlier detection, RFM scoring,
+  cohort retention, PCA, business metrics) rather than the source repo's
+  full 54-skill catalog.
+- 10 CRISP-DM Master's Curriculum: Fisher's Iris dataset (1936), bundled
+  directly in scikit-learn — a textbook-paced walkthrough of all six CRISP-DM
+  phases with a concept check at each one, deliberately placing K-Means
+  clustering next to a 3-classifier comparison on identical data so the
+  unsupervised/supervised distinction is directly visible in one place.
+- 11 Enterprise Data Science Audit: no external dataset at all — the
+  portfolio's own source code (projects 01-10's real app.py and README.md
+  files, read from disk at runtime) is the data.
+```
+
+**A real auditor, audited during its own construction**: project 11's first
+working version was run against the (at-the-time 10-project) portfolio and
+produced two visibly wrong results — an unfair leakage-risk penalty against
+the two unsupervised projects (02, 03) for lacking a `train_test_split`
+they have no use for, and a false-negative leakage flag against project 04
+for a scaler that's actually fit safely on train-only data, just not via
+the one `Pipeline(...)` idiom the first heuristic recognized. Both were
+diagnosed by reading the flagged projects' actual code and confirming the
+audit was wrong, then fixed in the auditor (a three-category rubric —
+predictive / unsupervised / tool — and a second accepted safe-scaler
+pattern) before the project was considered done, rather than shipping
+results known to be unfair. A third, harder-to-fix gap (project 05's
+hand-rolled NumPy metrics not matching any named-function keyword) was
+identified but deliberately left as a disclosed limitation rather than
+chased with more heuristics, in keeping with "keep it simple."
+
+**Sequencing note**: projects 09 and 10's READMEs were written *after*
+project 11's audit tool was first run against them — their absence at that
+point showed up as real `Documentation: 0` scores in project 11's live
+scorecard, which is disclosed directly in project 11's own README as
+evidence the tool computes real results rather than a canned demo. Project
+11's screenshots were then recaptured a final time after all documentation
+was in place, so the shipped screenshots reflect the portfolio's completed
+state rather than a mid-work snapshot.
+
+As with every prior batch, all three new apps were driven end-to-end with
+headless Playwright (including cycling through 5 of project 09's 10 skills
+individually) before being considered done.
