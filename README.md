@@ -6,7 +6,7 @@ built almost entirely inside **[Claude Code](https://claude.com/claude-code)**
 as an assignment replicating (and improvising on) the workflow demonstrated
 in [dlmastery/data_science_examples](https://github.com/dlmastery/data_science_examples).
 
-**🎥 Video walkthrough:** _[add your YouTube link here before submitting — see "Video walkthrough" below]_
+**🎥 Video walkthrough:** _[[Demo](https://www.youtube.com/watch?v=l2bjdQBmL8A&t=3s)]_
 
 ---
 
